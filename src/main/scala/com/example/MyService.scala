@@ -44,11 +44,11 @@ trait MyService extends HttpService {
     path("test-detach" / LongNumber) { id =>
       get {
         println(s"detach-out ${Thread.currentThread().getName}")
-        detach(global) {
+        detach(global) { ctx =>
           println(s"detach-in-1 ${Thread.currentThread().getName}")
           Thread.sleep(5000)
           println(s"detach-in-2 ${Thread.currentThread().getName}")
-          complete("OK")
+          ctx.complete("OK")
         }
       }
     } ~
